@@ -1,4 +1,4 @@
-#!/usr/bin/perl
+#!/usr/bin/env perl
 my $USAGE = "Usage: $0 [--inifile inifile.ini] [--section section] [--recmark lx] [--debug] [file.sfm]";
 =pod
 This script is a stub that provides the code for opl'ing and de_opl'ing an input file
