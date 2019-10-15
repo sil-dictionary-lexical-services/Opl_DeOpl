@@ -1,9 +1,9 @@
 #!/usr/bin/env perl
-my $USAGE = "Usage: $0 [--inifile inifile.ini] [--section section] [--recmark lx] [--debug] [file.sfm]";
+my $USAGE = "Usage: $0 [--inifile inifile.ini] [--section section] [--recmark lx] [--eolrep #] [--reptag __hash__] [--debug] [file.sfm]";
 =pod
 This script is a stub that provides the code for opl'ing and de_opl'ing an input file
 It also includes code to:
-	- use an ini file
+	- use an ini file (commented out)
 	- process command line options including debugging
 
 The ini file should have sections with syntax like this:
@@ -32,6 +32,12 @@ GetOptions (
 # additional options go here.
 # 'sampleoption:s' => \(my $sampleoption = "optiondefault"),
 	'recmark:s' => \(my $recmark = "lx"), # record marker, default lx
+	'eolrep:s' => \(my $eolrep = "#"), # character used to replace EOL
+	'reptag:s' => \(my $reptag = "__hash__"), # tag to use in place of the EOL replacement character
+	# e.g., an alternative is --eolrep % --reptag __percent__
+
+	# Be aware # is the bash comment character, so quote it if you want to specify it.
+	#	Better yet, just don't specify it -- it's the default.
 	'debug'       => \my $debug,
 	) or die $USAGE;
 
@@ -56,10 +62,10 @@ my $line = ""; # accumulated SFM record
 while (<>) {
 	s/\R//g; # chomp that doesn't care about Linux & Windows
 	#perhaps s/\R*$//; if we want to leave in \r characters in the middle of a line 
-	s/#/\_\_hash\_\_/g;
-	$_ .= "#";
+	s/$eolrep/$reptag/g;
+	$_ .= "$eolrep";
 	if (/^\\$recmark /) {
-		$line =~ s/#$/\n/;
+		$line =~ s/$eolrep$/\n/;
 		push @opledfile_in, $line;
 		$line = $_;
 		}
@@ -74,8 +80,8 @@ for my $oplline (@opledfile_in) {
 say STDERR "oplline:", Dumper($oplline) if $debug;
 #de_opl this line
 	for ($oplline) {
-		s/#/\n/g;
-		s/\_\_hash\_\_/#/g;
+		s/$eolrep/\n/g;
+		s/$reptag/$eolrep/g;
 		print;
 		}
 	}
