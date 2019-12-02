@@ -74,8 +74,8 @@ while (<>) {
 push @opledfile_in, $line;
 
 for my $oplline (@opledfile_in) {
-# insert code here to perform on each opl'ed line.
-
+# Insert code here to perform on each opl'ed line.
+# Note that a next command will prevent the line from printing
 
 say STDERR "oplline:", Dumper($oplline) if $debug;
 #de_opl this line
