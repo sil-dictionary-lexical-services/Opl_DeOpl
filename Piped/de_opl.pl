@@ -1,6 +1,6 @@
-# perl -CSD -pf opl.pl FileName.OPL >FileName.SFM
+# perl -CSD -pf de_opl.pl FileName.OPL >FileName.SFM
 #or
-# perl -CSD -pf opl.pl <FileName.OPL >FileName.SFM
+# perl -CSD -pf de_opl.pl <FileName.OPL >FileName.SFM
 # undoes opl.pl & opl-bsl
 # Converts SFM file from one record per line to one field per line
 # occurences of '_hash_'  are changed to back to '#'
