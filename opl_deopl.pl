@@ -44,9 +44,9 @@ GetOptions (
 # check your options and assign their information to variables here
 $recmark =~ s/[\\ ]//g; # no backslashes or spaces in record marker
 
-# if you need  a config file uncomment the following and modify it for the initialization you need.
+# if you do not need a config file ucomment the following and modify it for the initialization you need.
 # if you have set the $inifilename & $inisection in the options, you only need to set the parameter variables according to the parameter names
-=pod
+# =pod
 use Config::Tiny;
 my $config = Config::Tiny->read($inifilename, 'crlf');
 die "Quitting: couldn't find the INI file $inifilename\n$USAGE\n" if !$config;
@@ -54,7 +54,7 @@ my $param1 = $config->{"$inisection"}->{Param1};
 say STDERR "Param1:$param1" if $debug;
 my $param2 = $config->{"$inisection"}->{Param2};
 say STDERR "Param2:$param2" if $debug;
-=cut
+# =cut
 
 # generate array of the input file with one SFM record per line (opl)
 my @opledfile_in;
