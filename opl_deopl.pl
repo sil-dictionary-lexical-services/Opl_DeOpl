@@ -27,8 +27,8 @@ my $scriptname = fileparse($0, qr/\.[^.]*/); # script name without the .pl
 
 use Getopt::Long;
 GetOptions (
-#	'inifile:s'   => \(my $inifilename = "$scriptname.ini"), # ini filename
-#	'section:s'   => \(my $inisection = "section"), # section of ini file to use
+	'inifile:s'   => \(my $inifilename = "$scriptname.ini"), # ini filename
+	'section:s'   => \(my $inisection = "section"), # section of ini file to use
 # additional options go here.
 # 'sampleoption:s' => \(my $sampleoption = "optiondefault"),
 	'recmark:s' => \(my $recmark = "lx"), # record marker, default lx
@@ -61,7 +61,7 @@ my @opledfile_in;
 my $line = ""; # accumulated SFM record
 while (<>) {
 	s/\R//g; # chomp that doesn't care about Linux & Windows
-	#perhaps s/\R*$//; if we want to leave in \r characters in the middle of a line 
+	#perhaps s/\R*$//; if we want to leave in \r characters in the middle of a line
 	s/$eolrep/$reptag/g;
 	$_ .= "$eolrep";
 	if (/^\\$recmark /) {
@@ -85,4 +85,3 @@ say STDERR "oplline:", Dumper($oplline) if $debug;
 		print;
 		}
 	}
-
