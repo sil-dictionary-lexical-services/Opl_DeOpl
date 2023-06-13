@@ -4,6 +4,9 @@
 # Converts SFM file to one record per line
 # SFM fields are terminated by '#'
 # pre-existing '#' in the file are changed to '_hash_' 
+
+BEGIN {print STDERR "Warning:This version of opl.pl is deprecated.\n"}
+
 my $recmark = "lx";
 my $eolrep = "#";
 my $reptag = "\_\_hash\_\_";
