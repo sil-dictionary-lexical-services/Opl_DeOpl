@@ -10,6 +10,7 @@ All end-of-line (EOL) sequences are changed into *#*. Pre-existing *#* are chang
 
 It is much easier to manipulate SFM fields if the whole record is on one line.
 
+An example SFM file, *sample.sfm* and its opl'ed version *sample.opl* are included.
 
 ## Stub
 The /Stub directory contains a template for a script that Opl's and DeOpl's a file
