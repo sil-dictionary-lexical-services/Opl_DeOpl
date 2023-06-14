@@ -35,6 +35,3 @@ It has a section where you can include code that will be executed for each recor
 When the array has been processed, it is de_opl'ed to restore the file as an SFM file.
 
 The template script includes processing for an ini file, debugging, and command line options.
-
-## Piped
-The /Piped directory contains old versions of *opl.pl* and *de_opl.pl* that were called using *perl -pf*. They are now deprecated.
