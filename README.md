@@ -10,6 +10,20 @@ All end-of-line (EOL) sequences are changed into *#*. Pre-existing *#* are chang
 
 It is much easier to manipulate SFM fields if the whole record is on one line.
 
+*oplsfm.pl* and *de_oplsfm.pl* are versions that can be used on the bash command line or in a bash script in a pipe.
+
+If you don't want the default record marker (\\lx) and EOL (#), use options on the command line to adjust them. The following options are available (default value of the option in parentheses):
+ -  *--recmark*  : the SFM that starts a record (lx)
+  - *--eolrep* : the character that will replace LF or CRLF (#)
+  - *--reptag* : the string that will replace pre-existing *eolreps* (\_\_hash\_\_) 
+  - *--debug* : display debugging information to the scripts (off)
+
+Call them like:
+````bash
+    ./oplsfm.pl < sample.sfm > sample.opl
+    ./de_oplsfm.pl < sample.opl > sample.sfm
+````
+
 An example SFM file, *sample.sfm* and its opl'ed version *sample.opl* are included.
 
 ## Stub
