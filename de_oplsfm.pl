@@ -17,9 +17,13 @@ GetOptions (
 	) or die $USAGE;
 
 $recmark =~ s/[\\ ]//g; # no backslashes or spaces in record marker
+
+my $crlf = ($^O eq 'linux') ? "\n" : "\r\n"; # default according to operationg system
+# Note that the above default is used only for files with no EOL characters
+# Otherwise it will use the EOL characters from the opl'ed line.
 LINE: while (<<>>) {
-  s/\R//g;
-  s/$eolrep/\n/g;
+  $crlf = $MATCH if s/\R//;
+  s/$eolrep/$crlf/g;
   s/$reptag/$eolrep/g;
 }
 continue {

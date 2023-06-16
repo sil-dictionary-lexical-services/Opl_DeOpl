@@ -17,9 +17,10 @@ GetOptions (
 	) or die $USAGE;
 
 $recmark =~ s/[\\ ]//g; # no backslashes or spaces in record marker
+my $crlf;
 LINE: while (<<>>) {
-    s/\R//g;
-    print "\n" if /^\\$recmark /;
+    $crlf = $MATCH if  s/\R//g;
+    print "$crlf" if /^\\$recmark /;
     s/$eolrep/$reptag/g;
     $_ .= "$eolrep";
 }
