@@ -20,7 +20,7 @@ $recmark =~ s/[\\ ]//g; # no backslashes or spaces in record marker
 my $crlf;
 LINE: while (<<>>) {
     $crlf = $MATCH if  s/\R//g;
-    print "$crlf" if /^\\$recmark /;
+    print "$crlf" if /^\\($recmark) /;
     s/$eolrep/$reptag/g;
     $_ .= "$eolrep";
 }
