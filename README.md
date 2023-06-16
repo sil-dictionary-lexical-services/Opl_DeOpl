@@ -6,7 +6,7 @@ All end-of-line (EOL) sequences are changed into *#*. Pre-existing *#* are chang
  - Opl makes easy regexing of fields
  - EOLs are changed to # (by default)
  - pre-existing # characters are changed to '\_\_hash\_\_'
- - *de_oplsfm.pl* changes the opl'ed file back to SFM
+ - *de_oplsfm.pl* changes the opl'ed file back to SFM and '\_\_hash\_\_' back to '#'
 
 It is much easier to manipulate SFM fields if the whole record is on one line.
 
