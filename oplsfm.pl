@@ -25,5 +25,6 @@ LINE: while (<<>>) {
     $_ .= "$eolrep";
 }
 continue {
+    s/${eolrep}$/$crlf/ if eof();
     die "Cannot write to output: $!\n" unless print $_;
 }
