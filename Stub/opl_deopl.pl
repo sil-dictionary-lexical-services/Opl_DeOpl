@@ -59,13 +59,13 @@ say STDERR "Param2:$param2" if $debug;
 # generate array of the input file with one SFM record per line (opl)
 my @opledfile_in;
 my $line = ""; # accumulated SFM record
+my $crlf;
 while (<>) {
-	s/\R//g; # chomp that doesn't care about Linux & Windows
-	#perhaps s/\R*$//; if we want to leave in \r characters in the middle of a line
+	$crlf = $MATCH if  s/\R//g;
 	s/$eolrep/$reptag/g;
 	$_ .= "$eolrep";
 	if (/^\\$recmark /) {
-		$line =~ s/$eolrep$/\n/;
+		$line =~ s/$eolrep$/$crlf/;
 		push @opledfile_in, $line;
 		$line = $_;
 		}
