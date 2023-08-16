@@ -73,6 +73,7 @@ while (<>) {
 	}
 push @opledfile_in, $line;
 
+say STDERR "opledfile_in:", Dumper(@opledfile_in) if $debug;
 for my $oplline (@opledfile_in) {
 # Insert code here to perform on each opl'ed line.
 # Note that a next command will prevent the line from printing
@@ -80,7 +81,8 @@ for my $oplline (@opledfile_in) {
 say STDERR "oplline:", Dumper($oplline) if $debug;
 #de_opl this line
 	for ($oplline) {
-		s/$eolrep/\n/g;
+		$crlf=$MATCH if /\R/;
+		s/$eolrep/$crlf/g;
 		s/$reptag/$eolrep/g;
 		print;
 		}
