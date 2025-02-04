@@ -13,7 +13,7 @@ It is much easier to manipulate SFM fields if the whole record is on one line.
 *oplsfm.pl* and *de_oplsfm.pl* can be used on the bash command line or in a bash script in a pipe.
 
 If you don't want the default record marker (\\lx) and EOL (#), use options on the command line to adjust them. The following options are available (default value of the option in parentheses):
- -  *--recmark*  : the SFM that starts a record (lx)
+ -  *--recmark*  : the SFM(s) that start a record (lx)
   - *--eolrep* : the character that will replace LF or CRLF (#)
   - *--reptag* : the string that will replace pre-existing *eolreps* (\_\_hash\_\_) 
   - *--debug* : display debugging information when the scripts are run (off)
@@ -31,6 +31,10 @@ Or to use @ instead of # as an EOL replacement:
 
 An example SFM file, *sample.sfm* and its opl'ed version *sample.opl* are included in this repo.
 
+Occasionally, you may want to break the record on more than one field marker. For example you may want to consider sub-entries as entries for some purpose. You can specify more than one record marker in a comma delimited list. For example:
+````bash
+    ./oplsfm.pll --recmark 'lx,sed,sec,ses' < sample.sfm > ample-sed-c-s.opl
+````
 ## Stub
 The /Stub directory contains a template for a script that Opl's and DeOpl's a file
 It reads and opl's an SFM file into an array, one record per entry.
