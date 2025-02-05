@@ -1,5 +1,5 @@
 #!/usr/bin/env perl
-my $USAGE = "Usage: $0 [--inifile inifile.ini] [--section section] [--recmark lx] [--eolrep #] [--reptag __hash__] [--debug] [file.sfm]\n";
+my $USAGE = "Usage: $0 [--inifile inifile.ini] [--section section] [--recmark lx] [--eolrep #] [--reptag __hash__] [--debug] [file.sfm]\n recmark is a list of record markers to start the line\n";
 =pod
 This script is a stub that provides the code for opl'ing and de_opl'ing an input file
 It also includes code to:
@@ -31,7 +31,7 @@ GetOptions (
 	'section:s'   => \(my $inisection = "section"), # section of ini file to use
 # additional options go here.
 # 'sampleoption:s' => \(my $sampleoption = "optiondefault"),
-	'recmark:s' => \(my $recmark = "lx"), # record marker, default lx
+	'recmark:s' => \(my $recmark = "lx"), # record marker(2), default lx
 	'eolrep:s' => \(my $eolrep = "#"), # character used to replace EOL
 	'reptag:s' => \(my $reptag = "__hash__"), # tag to use in place of the EOL replacement character
 	# e.g., an alternative is --eolrep % --reptag __percent__
@@ -43,6 +43,9 @@ GetOptions (
 
 # check your options and assign their information to variables here
 $recmark =~ s/[\\ ]//g; # no backslashes or spaces in record marker
+$recmark =~ s/\,*$//; # no trailing commas
+$recmark =~  s/\,/\|/g; # use bars for or'ing
+my $srchRECmarks = qr/$recmark/;
 
 # if you do not need a config file ucomment the following and modify it for the initialization you need.
 # if you have set the $inifilename & $inisection in the options, you only need to set the parameter variables according to the parameter names
@@ -64,7 +67,7 @@ while (<>) {
 	$crlf = $MATCH if  s/\R//g;
 	s/$eolrep/$reptag/g;
 	$_ .= "$eolrep";
-	if (/^\\$recmark /) {
+	if (/^\\($srchRECmarks) /) {
 		$line =~ s/$eolrep$/$crlf/;
 		push @opledfile_in, $line;
 		$line = $_;
