@@ -44,3 +44,11 @@ It has a section where you can include code that will be executed for each recor
 When the array has been processed, it is de_opl'ed to restore the file as an SFM file.
 
 The template script includes processing for an ini file, debugging, and command line options.
+
+## To Install *oplsfm* and *de_oplsfm* commands in WSL
+You can install the two perl scripts as  *oplsfm* and *de_oplsfm* commands in bash:
+````bash
+    sudo cp oplsfm.pl /usr/local/bin/oplsfm
+    sudo cp de_oplsfm.pl /usr/local/bin/de_oplsfm
+````
+Note that the above commands assume that the scripts are on a Windows drive and have the executable attribute set.
